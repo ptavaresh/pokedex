@@ -1,14 +1,35 @@
 import React from 'react';
 
-import PokeSearch from './PokeSearch'
+import PokeSearch from './PokeSearch';
 
-const App = () => {
-    return (
+import pokeapi from '../api/pokeapi';
 
-    <div className="ui container" style={{marginTop: '10px'}}>
-        <PokeSearch />    
-    </div>
-    )
-};
+class App extends React.Component {
+    state = { pokemons: [] };
+  
+    onSearchSubmit = async name => {
+      const response = await pokeapi.get('ditto'//, {
+        //params: { query: name }
+      //}
+      //
+      );
+    console.log(response.data.name)
+    console.log(response)
+    console.log(response.data.sprites.back_default)
+      this.setState({ pokemons: response.data });
+    };
+  
+    render() {
+      return (
+        <div className="ui container" style={{ marginTop: '10px' }}>
+          <PokeSearch onSubmit={this.onSearchSubmit} />
+          Name: {this.state.pokemons.name}
+          ID: {this.state.pokemons.id}
+          <img src={this.state.pokemons.sprites}/>
 
-export default App;
+        </div>
+      );
+    }
+  }
+  
+  export default App;
