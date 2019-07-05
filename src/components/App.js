@@ -9,7 +9,7 @@ class App extends React.Component {
     state = { pokemons: [], picture: '' };
   
     onSearchSubmit = async name => {
-      const response = await pokeapi.get(name);
+      const response = await pokeapi.get(name.toLowerCase());
 
     console.log(response)
 
