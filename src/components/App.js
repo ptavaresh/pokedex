@@ -2,12 +2,17 @@ import React from 'react';
 
 import PokeSearch from './PokeSearch';
 import PokemonInfo from './PokemonInfo';
+import PokemonList from './PokemonList';
 
 import pokeapi from '../api/pokeapi';
 
 class App extends React.Component {
-    state = { pokemons: [], picture: '' };
+    state = { pokemons: [], picture: '', selectedPokemon: null };
   
+    onPokemonSelect = (pokemons) => {
+      console.log('From the App!', pokemons);
+};
+
     onSearchSubmit = async name => {
       const response = await pokeapi.get(name.toLowerCase());
 
@@ -21,6 +26,7 @@ class App extends React.Component {
         <div className="ui container" style={{ marginTop: '10px' }}>
           <PokeSearch onSubmit={this.onSearchSubmit} />
           <PokemonInfo pokemons={this.state.pokemons} picture={this.state.picture} />
+          <PokemonList onPokemonSelect={this.onPokemonSelect} pokemons={this.state.pokemons} picture={this.state.picture} />
         </div>
       );
     }
