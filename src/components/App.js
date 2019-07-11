@@ -11,6 +11,8 @@ class App extends React.Component {
   
     onPokemonSelect = (pokemons) => {
       console.log('From the App!', pokemons);
+      this.setState({ selectedPokemon: pokemons });
+      console.log(this.state.selectedPokemon)
 };
 
     onSearchSubmit = async name => {
@@ -26,7 +28,7 @@ class App extends React.Component {
         <div className="ui container" style={{ marginTop: '10px' }}>
           <PokeSearch onSubmit={this.onSearchSubmit} />
           <PokemonInfo pokemons={this.state.pokemons} picture={this.state.picture} />
-          <PokemonList onPokemonSelect={this.onPokemonSelect} pokemons={this.state.pokemons} picture={this.state.picture} />
+          <PokemonList onPokemonSelect={this.onPokemonSelect} pokemons={this.state.pokemons} picture={this.state.picture} selectedPokemon={this.state.selectedPokemon}/>
         </div>
       );
     }
